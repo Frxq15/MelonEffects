@@ -2,3 +2,8 @@ name: MelonEffects
 version: '${project.version}'
 main: org.melonmc.meloneffects.MelonEffects
 authors: [ Frxq15 ]
+
+commands:
+  sounds:
+    usage: /<command>
+    aliases: [soundeffects, se]

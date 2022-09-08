@@ -18,6 +18,7 @@ public class DataListeners implements Listener {
     @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
     public void onAsyncPlayerPreLoginEvent(AsyncPlayerPreLoginEvent event) {
         UUID uuid = event.getUniqueId();
+        if(plugin.getDataManager().playerExists(uuid)) return;
         plugin.getDataManager().createPlayer(uuid);
         PlayerData playerData = PlayerData.getPlayerData(plugin, uuid);
     }

@@ -23,9 +23,14 @@ public class DataManager {
         return plugin.getFileManager().getDataFile().getString(uuid + ".ACTIVE_EFFECT");
     }
     public void setActiveSound(UUID uuid, SoundEffect effect) {
-        plugin.getFileManager().getDataFile().set(uuid + ".ACTIVE_SOUND", effect);
+        plugin.getFileManager().getDataFile().set(uuid + ".ACTIVE_SOUND", effect.name());
+        plugin.getFileManager().saveDataFile();
     }
     public void setActiveEffect(UUID uuid, KillEffect effect) {
-        plugin.getFileManager().getDataFile().set(uuid + ".ACTIVE_SOUND", effect);
+        plugin.getFileManager().getDataFile().set(uuid + ".ACTIVE_EFFECT", effect.name());
+        plugin.getFileManager().saveDataFile();
+    }
+    public boolean playerExists(UUID uuid) {
+        return plugin.getFileManager().getDataFile().isConfigurationSection(String.valueOf(uuid));
     }
 }
