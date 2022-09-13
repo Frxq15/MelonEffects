@@ -2,7 +2,7 @@ package org.melonmc.meloneffects.data;
 
 import org.bukkit.Bukkit;
 import org.melonmc.meloneffects.MelonEffects;
-import org.melonmc.meloneffects.utils.KillEffect;
+import org.melonmc.meloneffects.effects.KillEffect;
 import org.melonmc.meloneffects.utils.SoundEffect;
 
 import java.util.HashMap;

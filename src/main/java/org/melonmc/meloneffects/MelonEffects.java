@@ -8,6 +8,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 import org.melonmc.meloneffects.command.soundsCommand;
 import org.melonmc.meloneffects.data.DataListeners;
 import org.melonmc.meloneffects.data.DataManager;
+import org.melonmc.meloneffects.effects.EffectManager;
 import org.melonmc.meloneffects.utils.Listeners;
 
 import java.util.ArrayList;
@@ -16,14 +17,17 @@ public final class MelonEffects extends JavaPlugin {
     private static MelonEffects instance;
     private FileManager fileManager;
     private DataManager dataManager;
+    private EffectManager effectManager;
 
     @Override
     public void onEnable() {
         instance = this;
         fileManager = new FileManager(this);
         dataManager = new DataManager(this);
+        effectManager = new EffectManager(this);
         saveDefaultConfig();
         getFileManager().createDataFile();
+        getEffectManager().registerEffects();
         Bukkit.getPluginManager().registerEvents(new DataListeners(this), this);
         Bukkit.getPluginManager().registerEvents(new Listeners(this), this);
         getCommand("sounds").setExecutor(new soundsCommand());
@@ -40,6 +44,7 @@ public final class MelonEffects extends JavaPlugin {
     public static String formatMsg(String input) {  return ChatColor.translateAlternateColorCodes('&', getInstance().getConfig().getString(input)); }
     public FileManager getFileManager() { return fileManager; }
     public DataManager getDataManager() { return dataManager; }
+    public EffectManager getEffectManager() { return effectManager; }
 
     public ArrayList<Player> getNearbyPlayers(Player p, double range){
         ArrayList<Player> nearby = new ArrayList<Player>();

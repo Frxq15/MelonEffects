@@ -1,6 +1,7 @@
-package org.melonmc.meloneffects.utils;
+package org.melonmc.meloneffects.effects;
 
 public enum KillEffect {
     NONE,
     LIGHTNING;
+
 }

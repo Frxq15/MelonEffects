@@ -7,6 +7,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.melonmc.meloneffects.MelonEffects;
 import org.melonmc.meloneffects.data.PlayerData;
+import org.melonmc.meloneffects.effects.KillEffect;
 
 public class Listeners implements Listener {
     private final MelonEffects plugin;
@@ -32,5 +33,22 @@ public class Listeners implements Listener {
         plugin.getNearbyPlayers(p, plugin.getConfig().getDouble("SOUND_EFFECT_RADIUS")).forEach(i -> {
             i.playSound(p.getLocation(), effect, 3, 1);
         });
+    }
+    @EventHandler
+    public void onKill(PlayerDeathEvent e) {
+        if(e.getEntity().getKiller() == null) {
+            return;
+        }
+        if(e.getEntity().getName().equalsIgnoreCase(e.getEntity().getKiller().getName())) {
+            return;
+        }
+
+        Player p = e.getEntity().getKiller();
+        PlayerData playerData = PlayerData.getPlayerData(plugin, p.getUniqueId());
+        KillEffect effect = playerData.getActiveEffect();
+        if(effect.equals(KillEffect.NONE)) {
+            return;
+        }
+        plugin.getEffectManager().perform(p, effect);
     }
 }
